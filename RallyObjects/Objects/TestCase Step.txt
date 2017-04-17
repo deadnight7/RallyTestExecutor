@@ -1,0 +1,50 @@
+{
+	"_rallyAPIMajor": "2",
+	"_rallyAPIMinor": "0",
+	"_ref": "https:\/\/rally1.rallydev.com\/slm\/webservice\/v2.0\/testcasestep\/104854999860",
+	"_refObjectUUID": "116f6638‐cdb0‐47dd‐b6f9‐5e677c782449",
+	"_objectVersion": "1",
+	"CreationDate": "2017‐03‐30T11:49:19.272Z",
+	"_CreatedAt": "Mar 30",
+	"ObjectID": 104854999860,
+	"ObjectUUID": "116f6638‐cdb0‐47dd‐b6f9‐5e677c782449",
+	"VersionId": "1",
+	"Subscription": {
+	"_rallyAPIMajor": "2",
+	"_rallyAPIMinor": "0",
+	"_ref": "https:\/\/rally1.rallydev.com\/slm\/webservice\/v2.0\/subscription\/119795615",
+	"_refObjectUUID": "22fd7c0b‐ddc3‐4828‐a5ba‐38f4adc49237",
+	"_refObjectName": "Cisco Common",
+	"_type": "Subscription"
+	},
+
+	"Workspace": {
+		"_rallyAPIMajor": "2",
+		"_rallyAPIMinor": "0",
+		"_ref": "https:\/\/rally1.rallydev.com\/slm\/webservice\/v2.0\/workspace\/23724738313",
+		"_refObjectUUID": "5e1fd628‐4970‐4a59‐8f4b‐ebd0ae3b922a",
+		"_refObjectName": "Cisco Information Technology",
+		"_type": "Workspace"
+		},
+		
+	"ExpectedResult": "User should be having permissions to edit Group object in ServicesOne",
+
+	"Input": "Precondition",
+
+	"StepIndex": 1,
+
+	"TestCase": {
+		"_rallyAPIMajor": "2",
+		"_rallyAPIMinor": "0",
+		"_ref": "https:\/\/rally1.rallydev.com\/slm\/webservice\/v2.0\/testcase\/104853953788",
+		4/5/2017 jsonprettyprint.com/jsonprettyprinter.
+		php
+		http://jsonprettyprint.com/jsonprettyprinter.
+		php 2/6
+		"_refObjectUUID": "a2f896c2‐3e82‐4d6d‐b140‐82f8df13c4bc",
+		"_refObjectName": "Verify whether there exists an Active Flag checkbox on Group object",
+			"_type": "TestCase"
+	},
+
+	"_type": "TestCaseStep"
+}
