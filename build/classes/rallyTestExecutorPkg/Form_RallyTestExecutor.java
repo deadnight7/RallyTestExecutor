@@ -299,7 +299,7 @@ public class Form_RallyTestExecutor extends javax.swing.JFrame {
 
     private void btnValidateDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidateDataActionPerformed
         // TODO add your handling code here:
-        Form_UploadTestCaseForm form = new Form_UploadTestCaseForm(strAPIKeyTextbox.getText());
+        Form_UploadTestCaseForm form = new Form_UploadTestCaseForm();
         form.setVisible(true);
     }//GEN-LAST:event_btnValidateDataActionPerformed
 
@@ -769,7 +769,7 @@ public class Form_RallyTestExecutor extends javax.swing.JFrame {
 
     private void Upload_Tests_In_RallyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Upload_Tests_In_RallyActionPerformed
         // TODO add your handling code here:
-        Form_UploadTestCaseForm form = new Form_UploadTestCaseForm(strAPIKeyTextbox.getText());
+        Form_UploadTestCaseForm form = new Form_UploadTestCaseForm();
         form.setVisible(true);
     }//GEN-LAST:event_Upload_Tests_In_RallyActionPerformed
 

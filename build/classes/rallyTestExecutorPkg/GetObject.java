@@ -86,8 +86,7 @@ public class GetObject {
     }
 
     public static void main(String[] args) {
-        
-       RallyRestApi restApi = null;
+        RallyRestApi restApi = null;
         try {
 
             String strUserAlias = "cpandit@cisco.com";

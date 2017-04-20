@@ -55,7 +55,6 @@ public class Form_UploadTestCaseForm extends javax.swing.JFrame {
     //String workspaceRef = "/workspace/11111"; 
     String applicationName = globals.applicationName;//"_UpdateTCR";//This API Caller Application
     ArrayList<String>allInsertedTestsRef = new ArrayList<>();
-    String[] buttons = globals.buttons;
     /**
      * Creates new form UploadTestCaseForm
      */
@@ -64,18 +63,6 @@ public class Form_UploadTestCaseForm extends javax.swing.JFrame {
         initComponents();
         this.pack();
         this.setLocationRelativeTo(null);
-    }
-    
-    public Form_UploadTestCaseForm(String strRallyAPIKey) {
-
-        initComponents();
-        this.pack();
-        this.setLocationRelativeTo(null);
-        
-        //String newAPIKey = //JOptionPane.showInputDialog("Enter API Key..");
-        globals.setAPIKey(strRallyAPIKey);
-        this.strAPIKey = globals.getAPIKey();
-        //JOptionPane.showMessageDialog (null, "API Key set..");
     }
 
     /**
@@ -437,7 +424,7 @@ public class Form_UploadTestCaseForm extends javax.swing.JFrame {
        
         while (totalRowsIterator.hasNext()) {
             totalRowsIterator.next();
-            //System.out.println("iTotalRows: "+iTotalRows);
+            System.out.println("iTotalRows: "+iTotalRows);
             iTotalRows++;
         }
         System.out.println("iTotalRows: "+iTotalRows);
@@ -542,68 +529,29 @@ public class Form_UploadTestCaseForm extends javax.swing.JFrame {
                 iTestStepCount = 0;
                 iTestStepCount++;
                 log.append("Test " + strTestName + " || " + strDescription);
-                       
-                int iRepeat = -1;
-                do {
-                    strTestCaseInsertRef
-                            = udsInsertTestCase(
-                                    strTestName,
-                                    strDescription,
-                                    strWorkspaceRef,
-                                    strProjectRef,
-                                    strWorkProductRef,
-                                    strTestFolderRef,
-                                    userRef,
-                                    strPriority,
-                                    strMethod);
-                    if (strTestCaseInsertRef != null && strTestCaseInsertRef.contains("http")) {
-
-                        allInsertedTestsRef.add(strTestCaseInsertRef);
-                        log.append("Inserted Testcase - strTestCaseInsertRef: " + strTestCaseInsertRef + "\n");
-                        log.append("\nInserting test + step..:");
-                        log.append(iTestStepCount + " " + strTestStepInput + "||" + strActual + " ||\n");
-
-                        strTestCaseID = obj.udsGetObjectProperty(restApi, globals, "TestCase", "FormattedID", strTestCaseInsertRef, "_ref");
-
-                        boolean rc = udsInsertTestStep(
+                        
+                
+                strTestCaseInsertRef
+                        = udsInsertTestCase (
+                                strTestName,
+                                strDescription,
                                 strWorkspaceRef,
+                                strProjectRef,
                                 strWorkProductRef,
-                                strTestCaseID,
-                                strTestCaseInsertRef,
-                                iTestStepCount + "",
-                                strTestStepInput,
-                                strActual);
+                                strTestFolderRef,
+                                userRef,
+                                strPriority,
+                                strMethod);
+                if (strTestCaseInsertRef != null && strTestCaseInsertRef.contains("http")) {
 
-                        if (rc == false) {
-                            System.out.println("Unable to insert test step...");
-                            iRepeat = JOptionPane.showOptionDialog(null, "Question ? : "+"Unable to insert Testcase - strTestCaseInsertRef: " + strTestCaseInsertRef + ", Retry again?", "Confirmation",
-                                    JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
-
-                            //return;
-                        }
-                    } else {
-                        log.append("Unable to insert Testcase - strTestCaseInsertRef: " + strTestCaseInsertRef + "\n");
-                        //return;
-                        iRepeat = JOptionPane.showOptionDialog(null, "Question ? : "+"Unable to insert Testcase - strTestCaseInsertRef: " + strTestCaseInsertRef + ", Retry again?", "Confirmation",
-                            JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
-                    }
-                } while ((strTestCaseInsertRef == null || strTestCaseInsertRef.contains("http") == false) 
-                        && iRepeat == globals.iButtonRetry) ;
-                
-                if (iRepeat == globals.iButtonCancel)
-                {
-                    log.append("\nCancelling out process...\n");
-                    return;
-                }
-                
-            } else if (strTestName == null || strTestName.equalsIgnoreCase("null")) {
-
-                int iRepeat = -1;boolean rc ;
-                do {
-                    log.append("Inserting step..: ");
-                    iTestStepCount++;
+                    allInsertedTestsRef.add(strTestCaseInsertRef);
+                    log.append("Inserted Testcase - strTestCaseInsertRef: " + strTestCaseInsertRef + "\n");
+                    log.append("\nInserting test + step..:");
                     log.append(iTestStepCount + " " + strTestStepInput + "||" + strActual + " ||\n");
-                    rc = udsInsertTestStep(
+
+                    strTestCaseID = obj.udsGetObjectProperty(restApi, globals,"TestCase", "FormattedID", strTestCaseInsertRef, "_ref");
+
+                    boolean rc = udsInsertTestStep(
                             strWorkspaceRef,
                             strWorkProductRef,
                             strTestCaseID,
@@ -614,15 +562,29 @@ public class Form_UploadTestCaseForm extends javax.swing.JFrame {
 
                     if (rc == false) {
                         System.out.println("Unable to insert test step...");
-                        iRepeat = JOptionPane.showOptionDialog(null, "Question ? : "+"Unable to insert test step "+iTestStepCount+" for Test : "+strTestCaseID+"..., Retry again?", "Confirmation",
-                            JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
-                        //return;
+                        return;
                     }
-                }while (rc == false  && iRepeat == globals.iButtonRetry);
-                
-                if (iRepeat == globals.iButtonCancel)
-                {
-                    log.append("\nCancelling out process...\n");
+                } else {
+                    log.append("Unable to insert Testcase - strTestCaseInsertRef: " + strTestCaseInsertRef + "\n");
+                    //return;
+                }
+
+            } else if (strTestName == null || strTestName.equalsIgnoreCase("null")) {
+
+                log.append("Inserting step..: ");
+                iTestStepCount++;
+                log.append(iTestStepCount + " " + strTestStepInput + "||" + strActual + " ||\n");
+                boolean rc = udsInsertTestStep(
+                        strWorkspaceRef,
+                        strWorkProductRef,
+                        strTestCaseID,
+                        strTestCaseInsertRef,
+                        iTestStepCount + "",
+                        strTestStepInput,
+                        strActual);
+
+                if (rc == false) {
+                    System.out.println("Unable to insert test step...");
                     return;
                 }
             }
